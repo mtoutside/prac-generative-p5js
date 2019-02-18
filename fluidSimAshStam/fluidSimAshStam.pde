@@ -13,8 +13,12 @@ void setup() {
   fluid = new Fluid(0.2, 0, 0.0000001);
 }
 
-//void mouseDragged() {
-//}
+void mouseDragged() {
+  fluid.addDensity(mouseX / SCALE, mouseY / SCALE, 100);
+  float amtX = mouseX - pmouseX;
+  float amtY = mouseY - pmouseY;
+  fluid.addVelocity(mouseX / SCALE, mouseY / SCALE, amtX, amtY);
+}
 
 void draw() {
   background(0);
