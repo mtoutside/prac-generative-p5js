@@ -1,0 +1,40 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Averia+Libre&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Averia+Libre|IM+Fell+English+SC&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:700,900&display=swap');
+
+body {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100%;
+	background: linear-gradient(90deg, rgba(205,206,175,1) 0%, rgba(146,221,150,1) 50%, rgba(140,89,220,1) 100%);
+}
+#wrapper {
+	display: flex;
+	box-shadow:4px 5px 10px 1px #333;
+}
+canvas {
+}
+.titlearea {
+	background: #052D9B;
+	display: flex;
+}
+.titlearea h1 {
+	/* font-family: 'IM Fell English SC', cursive; */
+	font-family: 'Roboto', cursive;
+	font-weight: 700;
+	font-size: 32px;
+	text-shadow:2px 2px 3px #333333;
+	letter-spacing: 0.1em;
+	color: #fff;
+	text-align: center;
+	-webkit-writing-mode: vertical-rl;
+	-ms-writing-mode: tb-rl;
+	writing-mode: vertical-rl;
+	-webkit-text-orientation: upright; /* Safari */
+    text-orientation: upright;
+}
