@@ -44,6 +44,17 @@ function draw() {
       ellipse(posX + shiftX, posY + shiftY, moduleRadiusBackground, moduleRadiusBackground);
 		}
 	}
+
+	for(let gridY = 0; gridY < tileCount; gridY++) {
+		for(let gridX = 0; gridX < tileCount; gridX++) {
+      let posX = width / tileCount * gridX;
+      let posY = height / tileCount * gridY;
+
+
+      fill(moduleColorForeground);
+      ellipse(posX, posY, moduleRadiusForeground, moduleRadiusForeground);
+		}
+	}
 }
 
 function mousePressed() {
@@ -58,4 +69,52 @@ function keyReleased() {
       moduleColorBackground = color(0, 0, 0, moduleAlphaBackground);
     }
   }
+  if(key == '2') {
+    if(colorsEqual(moduleColorForeground, color(360, 100, 100, moduleAlphaForeground))) {
+      moduleColorForeground = color(323, 100, 77, moduleAlphaForeground);
+    } else {
+      moduleColorForeground = color(360, 100, 100, moduleAlphaForeground);
+    }
+  }
+
+  if(key == '3') {
+    if(moduleAlphaBackground == 100) {
+      moduleAlphaBackground = 50;
+      moduleAlphaForeground = 50;
+    } else {
+      moduleAlphaBackground = 100;
+      moduleAlphaForeground = 100;
+    }
+
+    moduleColorBackground = color(
+      hue(moduleColorForeground),
+      saturation(moduleColorForeground),
+      brightness(moduleColorBackground),
+      moduleAlphaBackground
+    );
+    moduleColorForeground = color(
+      hue(moduleColorForeground),
+      saturation(moduleColorForeground),
+      brightness(moduleColorForeground),
+      moduleAlphaForeground
+    );
+  }
+
+  if(key == '0') {
+    moduleRadiusBackground = 30;
+    moduleRadiusForeground = 15;
+    moduleAlphaBackground = 100;
+    moduleAlphaForeground = 100;
+    moduleColorBackground = color(0, 0, 0, moduleAlphaBackground);
+    moduleColorForeground = color(0, 0, 100, moduleAlphaForeground);
+  }
+
+  if(keyCode == UP_ARROW) moduleRadiusBackground += 2;
+  if(keyCode == DOWN_ARROW) moduleRadiusForeground = max(moduleRadiusBackground - 2, 10);
+  if(keyCode == LEFT_ARROW) moduleRadiusForeground = max(moduleRadiusForeground - 2, 5);
+  if(keyCode == RIGHT_ARROW) moduleRadiusForeground += 2;
+}
+
+function colorsEqual(col1, col2) {
+  return col1.toString() == col2.toString();
 }
