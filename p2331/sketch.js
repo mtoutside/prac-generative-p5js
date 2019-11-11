@@ -12,6 +12,13 @@ let angleDistortion = 0.0;
 let counter = 0;
 
 function setup() {
+  window.addEventListener("touchstart", (event) => {
+    event.preventDefault();
+  }, { passive: false });
+  window.addEventListener("touchmove", (event) => {
+    event.preventDefault();
+  }, { passive: false });
+
   createCanvas(windowWidth, windowHeight);
   background(255);
   cursor(CROSS);
