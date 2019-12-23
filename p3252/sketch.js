@@ -309,7 +309,18 @@ class AniLetters {
     this.crossBar(0,that.letterHeight);
     pop();
   }
-}
+
+  sCurve(x1, y1) {
+    push();
+    translate(x1, y1);
+
+    this.static = () => {
+      noFill();
+      curve(that.letterWidth, -that.letterHeight * 1.5, 0, that.letterHeight * 0.25, that.letterWidth, that.letterHeight * 0.75, that.letterWidth - that.letterWidth, that.letterHeight * 0.75 + that.letterHeight * 1.5);
+      arc(that.letterWidth / 2, that.letterHeight * 0.25, that.letterWidth, that.letterHeight / 2, PI, 0);
+      arc(that.letterWidth / 2, that.letterHeight * 0.75, that.letterWidth, that.letterHeight / 2, 0, PI);
+    }
+  }
 function keyPressed() {
   if (keyCode === CONTROL) saveCanvas(gd.timestamp(), 'png');
 
