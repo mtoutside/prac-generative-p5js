@@ -1,53 +1,40 @@
 'use strict';
 
-let tileCountX = 9;
-let tileCountY = 12;
-let tileWidth;
-let tileHeight;
-let imageCount = tileCountX * tileCountY;
-let currentImage = 0;
-let gridX = 0;
-let gridY = 0;
+let cam;
+let intervalTime = 30;
 
-let movie;
-
-function preload() {
-  movie = createVideo(['data/video.mp4', 'data/video.ogg']);
-  movie.hide();
-}
+let secondsSinceStart = 0;
+let startTime = gd.timestamp();
+let counter = 0;
+let doSave = 0;
+let streamReady = false;
 
 function setup() {
-	createCanvas(1024, 1024);
-  background(0);
-
-  tileWidth = width / tileCountX;
-  tileHeight = height / tileCountY;
-  print(movie.width + ' ・ ' + movie.height);
+	createCanvas(640, 480);
+  cam = createCapture(VIDEO, () => {
+    streamReady = true;
+  });
+  cam.hide();
+  noStroke();
 }
 
 function draw() {
-  if(movie.elt.readyState === 4) {
-    let posX = tileWidth * gridX;
-    let posY = tileHeight * gridY;
+  if(streamReady) {
+    image(cam ,0, 0, width, width * cam.heignt / cam.width);
 
-    image(movie, posX, posY, tileWidth, tileHeight);
+    secondsSinceStart = millis() / 1000;
+    let interval = int(secondsSinceStart % intervalTime);
 
-    currentImage++;
-
-    let nextTime = map(currentImage, 0, imageCount, 0, movie.duration());
-    print('seek to: ' + movie.time());
-    movie.time(nextTime);
-
-    gridX++;
-    if(gridX >= tileCountX) {
-      gridX = 0;
-      gridY++;
+    if(interval === 0 && doSave === true) {
+      let saveFileName = startTime + '-' + nf(counter, 5, 0);
+      saveCanvas(saveFileName, 'png');
+      doSave = false;
+      counter++;
+    } else if(interval !== 0) {
+      doSave = true;
     }
 
-    if(currentImage >= imageCount) noLoop();
+    fill(random(0, 255), random(0, 255), random(0, 255));
+    rect(map(interval, 0, intervalTime, 0, width), 0, 5, 5);
   }
-}
-
-function keyReleased() {
-  if (key === 's' || key === 'S') saveCanvas(gd.timestamp(), 'png');
 }
