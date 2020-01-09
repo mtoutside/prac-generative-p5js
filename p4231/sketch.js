@@ -1,8 +1,8 @@
 'use strict';
 
-let videoSrc = '';
+let videoSrc = './data/P_4_2_3_supercut-media/video.mp4';
 let video;
-let subtitleSrc = '';
+let subtitleSrc = './data/P_4_2_3_supercut-media/subs.vtt';
 let subtitles;
 
 let searchQuery = '\\b(comet)\\b';
@@ -118,7 +118,7 @@ function queryResultMontage(searchResults, i) {
 
     if(tileMode) {
       let framePos = getFramePos();
-      let img = vidoe.get();
+      let img = video.get();
       image(img, framePos.x, framePos.y, frameWidth, frameHeight);
 
       let dialogElement = createSpan(currentResult.dialog);
