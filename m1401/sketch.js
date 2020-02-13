@@ -43,7 +43,7 @@ function setup() {
   midColor = color(191, 99, 63);
   bottomColor = color(0, 0, 0);
   strokeColor = color(180, 100, 100);
-  threshold = 0.30;
+  threshold = 0.3;
 
   offsetX = 0;
   offsetY = 0;
@@ -66,8 +66,11 @@ function draw() {
   if (mouseIsPressed && mouseButton === RIGHT) {
     offsetX = mouseX - clickX;
     offsetY = mouseY - clickY;
-    targetRotationX = min(max(clickRotationX + offsetY / float(width) * TWO_PI, -HALF_PI), HALF_PI);
-    targetRotationZ = clickRotationZ + offsetX / float(height) * TWO_PI;
+    targetRotationX = min(
+      max(clickRotationX + offsetY / float(width) * TWO_PI, -HALF_PI),
+      HALF_PI
+    );
+    targetRotationZ = clickRotationZ + (offsetX / float(height)) * TWO_PI;
   }
   rotationX += (targetRotationX - rotationX) * 0.25;
   rotationZ += (targetRotationZ - rotationZ) * 0.25;
@@ -89,7 +92,6 @@ function draw() {
   for (let meshY = 0; meshY <= tileCount; meshY++) {
     beginShape(TRIANGLE_STRIP);
     for (let meshX = 0; meshX <= tileCount; meshX++) {
-
       let x = map(meshX, 0, tileCount, -width / 2, width / 2);
       let y = map(meshY, 0, tileCount, -height / 2, height / 2);
 
@@ -128,18 +130,18 @@ function mousePressed() {
 }
 
 function keyReleased() {
-  if (keyCode  ===  UP_ARROW) falloff += 0.05;
-  if (keyCode  ===  DOWN_ARROW) falloff -= 0.05;
+  if (keyCode === UP_ARROW) falloff += 0.05;
+  if (keyCode === DOWN_ARROW) falloff -= 0.05;
   if (falloff > 1.0) falloff = 1.0;
   if (falloff < 0.0) falloff = 0.0;
 
-  if (keyCode === LEFT_ARROW)  octaves--;
-  if (keyCode === RIGHT_ARROW)  octaves++;
+  if (keyCode === LEFT_ARROW) octaves--;
+  if (keyCode === RIGHT_ARROW) octaves++;
   if (octaves < 0) octaves = 0;
 
-  if (keyCode  ===  187) zoom += 20;
-  if (keyCode  ===  189) zoom -= 20;
+  if (keyCode === 187) zoom += 20;
+  if (keyCode === 189) zoom -= 20;
 
-  if (key === 's' || key === 'S') saveCanvas(gd.timestamp(), 'png');
-  if (key === ' ') noiseSeed(floor(random(100000)));
+  if (key === "s" || key === "S") saveCanvas(gd.timestamp(), "png");
+  if (key === " ") noiseSeed(floor(random(100000)));
 }
