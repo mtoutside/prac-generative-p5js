@@ -1,4 +1,4 @@
-"use strict";
+import Agent from './Agent.js';
 
 const sketch = (p) => {
   const agents = [];
@@ -51,3 +51,5 @@ const sketch = (p) => {
 };
 
 const myp5 = new p5(sketch);
+
+export default myp5;
