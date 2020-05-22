@@ -29,6 +29,7 @@ const sketch = (p) => {
     p.background(255);
 
     p.translate(p.width / 2, p.height / 2);
+    pointCount = p.mouseX * 2 + 200;
 
     if(drawMode === 1) {
       p.stroke(0);
