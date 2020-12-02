@@ -1,9 +1,15 @@
 import myp5 from './sketch.js';
 
-export default class Node {
+class VectorObj {
+  constructor() {
+    VectorObj.prototype = Object.create(p5.Vector.prototype);
+  }
+}
+
+export default class Node extends VectorObj {
   constructor(x, y, minX, maxX, minY, maxY) {
+    super();
     p5.Vector.call(this, x, y, 0);
-    console.log(Node);
     this.minX = Number.MIN_VALUE || minX;
     this.maxX = Number.MAX_VALUE || maxX;
     this.minY = Number.MIN_VALUE || minY;
@@ -16,7 +22,7 @@ export default class Node {
     this.pVelocity = myp5.createVector();
     this.maxVelocity = 10;
 
-    this.prototype = Object.create(p5.Vector.prototype);
+    // this.__proto__ = Object.create(p5.Vector.prototype);
   }
 
 
