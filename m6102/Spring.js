@@ -13,17 +13,18 @@ export default class Spring {
 
   update() {
     console.log(this.toNode);
+    console.log(this.fromNode);
     let diff = p5.Vector.sub(this.toNode, this.fromNode);
-    diff.normalize();
-    diff.mult(this.length);
-    let target = p5.Vector.add(this.fromNode, diff);
-
-    let force = p5.Vector.sub(target, this.toNode);
-    force.mult(0.5);
-    force.mult(this.stiffness);
-    force.mult(1 - this.damping);
-
-    this.toNode.velocity.add(force);
-    this.fromNode.velocity.add(p5.Vector.mult(force, -1));
+    // diff.normalize();
+    // diff.mult(this.length);
+    // let target = p5.Vector.add(this.fromNode, diff);
+    //
+    // let force = p5.Vector.sub(target, this.toNode);
+    // force.mult(0.5);
+    // force.mult(this.stiffness);
+    // force.mult(1 - this.damping);
+    //
+    // this.toNode.velocity.add(force);
+    // this.fromNode.velocity.add(p5.Vector.mult(force, -1));
   }
 }
